@@ -4,7 +4,7 @@ const API_URL = 'https://pixabay.com/api';
 const API_KEY = '29601510-cb62b0e552e92b2824471424b';
 const PARAMS = `?key=${API_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=`;
 
-export const fetchPicture = async (page, query) => {
+export const getImages= async (page, query) => {
   const endPoint =
     API_URL +
     `/?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`;

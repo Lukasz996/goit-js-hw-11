@@ -1,8 +1,7 @@
 import './css/styles.css';
-import { getPicture } from './js/getPicture';
+import { getImages } from './js/getImages';
 import axios from 'axios';
 import Notiflix from 'notiflix';
-
 
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
@@ -26,7 +25,7 @@ const handleClick = async e => {
   e.preventDefault();
   hideLoadMore();
   page = 1;
-  const data = await getPicture(page, query);
+  const data = await getImages(page, query);
   createGallery(data.hits);
   const { total, totalHits } = data;
   if (total && totalHits) {
@@ -76,13 +75,12 @@ const createGallery = data => {
 `;
     })
     .join(' ');
-  gallery.innerHTML = images;
+  // gallery.innerHTML = images;
+  gallery.insertAdjacentHTML('beforeend', images);
 };
 
 const handleLoadMore = async () => {
-  if (
-    totalImages - 
-    page * 40 > 40) {
+  if (totalImages - page * 40 > 40) {
     loadMore.className = 'load-more';
   } else {
     loadMore.className = 'hidden';
@@ -91,7 +89,7 @@ const handleLoadMore = async () => {
     );
   }
   page++;
-  const data = await getPicture(page, query);
+  const data = await getImages(page, query);
   console.log(data);
   createGallery(data.hits);
   const { total } = data;
@@ -101,13 +99,6 @@ btn.addEventListener('click', handleClick);
 handleChange && inputSearch.addEventListener('input', handleChange);
 
 loadMore.addEventListener('click', handleLoadMore);
-
-
-
-
-
-
-
 
 
 
