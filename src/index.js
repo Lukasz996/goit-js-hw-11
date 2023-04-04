@@ -25,6 +25,7 @@ const handleClick = async e => {
   e.preventDefault();
   hideLoadMore();
   page = 1;
+  gallery.innerHTML = '';
   const data = await getImages(page, query);
   createGallery(data.hits);
   const { total, totalHits } = data;
